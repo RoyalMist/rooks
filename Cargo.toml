@@ -1,0 +1,8 @@
+[package]
+name = "rooks"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+extism = "1.9.1"
+serde = { version = "1", features = ["derive"] }
