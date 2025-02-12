@@ -25,7 +25,7 @@ fn main() {
     };
 
     let manifest = Manifest::new([path])
-        .with_config_key("redact", "Francesco")
+        .with_config_key("redact", "XXXX")
         .with_allowed_host("api.chucknorris.io");
 
     let mut plugin = Plugin::new(&manifest, [], false).unwrap();
