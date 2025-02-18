@@ -11,6 +11,6 @@ fn main() {
     let res = plugin::call(input);
     match res {
         Ok(res) => println!("{}", res),
-        Err(err) => println!("{:?}", err),
+        Err(err) => println!("Error: {}", err.root_cause()),
     }
 }
