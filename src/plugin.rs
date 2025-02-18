@@ -4,10 +4,21 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct In {
-    pub(crate) name: String,
-    pub(crate) age: i32,
-    pub(crate) happy: bool,
-    pub(crate) school: String,
+    name: String,
+    age: i32,
+    happy: bool,
+    school: String,
+}
+
+impl In {
+    pub fn new(name: String, age: i32, happy: bool, school: String) -> Self {
+        In {
+            name,
+            age,
+            happy,
+            school,
+        }
+    }
 }
 
 pub fn call(input: In) -> Result<String, Error> {
