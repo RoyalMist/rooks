@@ -9,5 +9,8 @@ fn main() {
     };
 
     let res = plugin::call(input);
-    println!("{:?}", res);
+    match res {
+        Ok(res) => println!("{}", res),
+        Err(err) => println!("{:?}", err),
+    }
 }

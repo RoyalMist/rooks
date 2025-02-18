@@ -1,5 +1,5 @@
 use extism::convert::Json;
-use extism::{Manifest, Plugin, Wasm};
+use extism::{Error, Manifest, Plugin, Wasm};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -10,10 +10,10 @@ pub struct In {
     pub(crate) school: String,
 }
 
-pub fn call(input: In) -> String {
-    let wasm_path = std::env::var("WASM_PATH").unwrap();
+pub fn call(input: In) -> Result<String, Error> {
+    let wasm_path = std::env::var("WASM_PATH")?;
     let path = Wasm::File {
-        path: wasm_path.parse().unwrap(),
+        path: wasm_path.parse()?,
         meta: Default::default(),
     };
 
@@ -21,8 +21,6 @@ pub fn call(input: In) -> String {
         .with_config_key("redact", "XXXX")
         .with_allowed_host("api.chucknorris.io");
 
-    let mut plugin = Plugin::new(&manifest, [], false).unwrap();
-    plugin
-        .call::<Json<In>, String>("call", Json::from(input))
-        .unwrap()
+    let mut plugin = Plugin::new(&manifest, [], false)?;
+    plugin.call::<Json<In>, String>("call", Json::from(input))
 }
